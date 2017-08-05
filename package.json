@@ -1,0 +1,26 @@
+{
+  "name": "scrapeit",
+  "version": "1.0.0",
+  "description": "Simple web scraper",
+  "main": "server.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/namansachdeva/ScrapeIt.git"
+  },
+  "author": "Naman Sachdeva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/namansachdeva/ScrapeIt/issues"
+  },
+  "homepage": "https://github.com/namansachdeva/ScrapeIt#readme"
+}
