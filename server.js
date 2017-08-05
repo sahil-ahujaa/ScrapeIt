@@ -16,8 +16,19 @@ app.get('/scrape', function(req,res){
 			var $ = cheerio.load(html);
 			var title, release, rating;
 			var json = {title:"",release:"",rating:""};
+
+			$('.title_wrapper').filter(function(){
+				var data = $(this);
+				title = data.children().first().text().trim();
+				json.title = title;
+			})
 		}
-	})
+
+		fs.writeFile('output.json', JSON.stringify(json,null,4), function(err){
+			console.log('File successfully written.');
+		})
+	});
+res.send('Check the console.');
 
 })
 
