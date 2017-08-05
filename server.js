@@ -22,6 +22,18 @@ app.get('/scrape', function(req,res){
 				title = data.children().first().text().trim();
 				json.title = title;
 			})
+
+			$('[itemprop="datePublished"]').filter(function(){
+				var data = $(this);
+				release = data.attr("content");
+				json.release = release;
+			})
+
+			$('.ratingValue').filter(function(){
+				var data = $(this);
+				rating = data.children().first().text().trim();
+				json.rating = rating;
+			})
 		}
 
 		fs.writeFile('output.json', JSON.stringify(json,null,4), function(err){
