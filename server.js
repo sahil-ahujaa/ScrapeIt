@@ -7,41 +7,29 @@ var app = express();
 
 app.get('/scrape', function(req,res){
 
-	// Dummy URL for static scraper
-	url = 'http://www.imdb.com/title/tt5764096/';
+	
+	var result = {["faculty"]:[]};
+	// URL for faculty information of YMCAUST
+	url = 'http://www.ymcaust.ac.in/f_detail.php?id=11';
 
 	request(url, function(err,res,html){
 		if(!err){
 
 			var $ = cheerio.load(html);
-			var title, release, rating;
-			var json = {title:"",release:"",rating:""};
+			var name, qualification, department;
+			var json = {name:""};
 
-			$('.title_wrapper').filter(function(){
-				var data = $(this);
-				title = data.children().first().text().trim();
-				json.title = title;
-			})
-
-			$('[itemprop="datePublished"]').filter(function(){
-				var data = $(this);
-				release = data.attr("content");
-				json.release = release;
-			})
-
-			$('.ratingValue').filter(function(){
-				var data = $(this);
-				rating = data.children().first().text().trim();
-				json.rating = rating;
-			})
+			name = $('.faculty-head:last-child').text();
+			console.log(name+"this is printed");
+			json.name = name;
 		}
+		result["faculty"].push(json);
 
-		fs.writeFile('output.json', JSON.stringify(json,null,4), function(err){
+		fs.writeFile('output.json', JSON.stringify(result,null,4), function(err){
 			console.log('File successfully written.');
 		})
 	});
 res.send('Check the console.');
-
 })
 
 app.listen('8081');
